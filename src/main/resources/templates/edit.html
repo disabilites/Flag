@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>编辑 | (⊙﹏⊙)这里插满了Flag</title>
+
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+	<script th:src="@{/js/wangEditor.min.js}" src="/js/wangEditor.min.js"></script>
+	<script th:src="@{/js/jquery-3.1.1.min.js}" src="/js/jquery-3.1.1.min.js"></script>
+	<script th:src="@{/js/popper.min.js}" src="/js/popper.min.js"></script>
+	<script th:src="@{/js/bootstrap.min.js}" src="/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #dee2e6;">
+
+<div class="container mt-4">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="container mt-2">
+				<div class="card shadow">
+					<div class="card-header">
+
+						<div class="mt-2 mb-2">
+							<input type="text" class="form-control" placeholder="标题" name="title" th:value="${flag.title}">
+						</div>
+
+						<div class="form-row mt-3">
+							<div class="col-*-* ml-1">
+								<div class="custom-control custom-checkbox mt-2" th:if="${flag.top}">
+									<input type="checkbox" class="custom-control-input" id="top" name="top" th:checked="checked">
+									<label class="custom-control-label" for="top">置顶</label>
+								</div>
+								<div class="custom-control custom-checkbox mt-2" th:unless="${flag.top}">
+									<input type="checkbox" class="custom-control-input" id="notTop" name="top">
+									<label class="custom-control-label" for="notTop">置顶</label>
+								</div>
+							</div>
+
+
+							<div class="col-*-* ml-1">
+								<div class="custom-control custom-checkbox mt-2" th:if="${flag.remind}">
+									<input type="checkbox" class="custom-control-input" id="remind" name="remind" th:checked="checked">
+									<label class="custom-control-label" for="remind">邮件提醒</label>
+								</div>
+
+								<div class="custom-control custom-checkbox mt-2" th:unless="${flag.remind}">
+									<input type="checkbox" class="custom-control-input" id="notRemind" name="remind">
+									<label class="custom-control-label" for="notRemind">邮件提醒</label>
+								</div>
+							</div>
+							<div class="col-*-* ml-3">
+							  <input id = "showTime" type="text" class="form-control" placeholder="提醒时间" name="remindTime"
+									 style="display: none" th:value="${#dates.format(flag.remindTime, 'yyyy-MM-dd HH:mm')}">
+							</div>
+						</div>
+					</div>
+
+					<div class="card-body">
+						<div id="id" style="display: none" th:text="${flag.id}"></div>
+						<div id="editor" name="content" th:utext="${flag.content}"></div>
+						<div class="my_wrap btn-group mt-2 mb-2 float-right" role="group" aria-label="Basic example">
+							<button id="save" type="submit" class="btn btn-outline-primary">保存</button>
+							<button id="cancel" type="button" class="btn btn-outline-danger">取消</button>
+						</div>
+					</div>
+					<div class="card-footer">
+						<span name="saveTime" th:text="'最后保存时间：' + ${#dates.format(flag.saveTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
+<script src="/js/flag.js"></script>
+<script>
+	save($("#id").text());
+</script>
+
+</body>
+</html>

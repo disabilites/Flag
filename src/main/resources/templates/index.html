@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+	<title>(⊙﹏⊙)这里插满了Flag</title>
+	<link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+	<script th:src="@{/js/jquery-3.1.1.min.js}" src="/js/jquery-3.1.1.min.js"></script>
+	<script th:src="@{/js/popper.min.js}" src="/js/popper.min.js"></script>
+	<script th:src="@{/js/bootstrap.min.js}" src="/js/bootstrap.min.js"></script>
+
+	<style>
+		.fixed-bottom {
+			position: relative;
+			margin-top: 3%;
+		}
+		footer a{
+			color: #6c757d;
+		}
+		footer a:hover{
+			color: #007bff;
+		}
+	</style>
+</head>
+<body style="background-color: #dee2e6;" class="mb-5">
+
+<div class="container mt-4">
+	<div class="row">
+		<div class="col-md-2"></div>
+  
+		<div class="col-md-8">
+			<div class="btn-group dropright ml-3">
+				<a href="/flag/set">
+					<button type="button" class="btn btn-primary">新建</button>
+				</a>
+			</div>
+
+			<div class="dropdown float-right mr-3">
+				<button class="btn btn-primary dropdown-toggle" type="button" id="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${name}">
+				</button>
+				<div class="dropdown-menu">
+					<a id="changePassword" class="dropdown-item" href="#">修改密码</a>
+					<a class="dropdown-item" href="/logout">退出</a>
+				</div>
+			</div>
+			<div id="loading" class="spinner-grow text-primary float-right mr-2" role="status" style="display: none"></div>
+
+			<div class="jumbotron mt-3" th:if="${#lists.isEmpty(flags)}">
+				<h3>你还没有立Flag</h3>
+				<p class="lead">点击上方按钮，立一个Flag</p>
+			</div>
+
+			<div class="container mt-2" th:each="flag: ${flags}">
+				<div class="card shadow">
+					<div class="card-header">
+						<h3 th:text="${flag.title}">标题</h3>
+					</div>
+
+					<div class="card-body">
+
+						<div id="editor" th:utext="${flag.content}">
+							<p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+						</div>
+
+					<div class="my_wrap btn-group mt-2 float-right" role="group" aria-label="Basic example">
+						<a th:href="@{'/flag/edit/' + ${flag.id}}">
+							<button type="button" class="btn btn-outline-primary" name="update">修改</button>
+						</a>
+						<a th:href="@{'/flag/delete/' + ${flag.id}}">
+							<button type="button" class="btn btn-outline-danger" name="delete">删除</button>
+						</a>
+					</div>
+
+					</div>
+
+					<div class="card-footer">
+						<span th:text="'最后保存时间：' + ${#dates.format(flag.saveTime, 'yyyy-MM-dd HH:mm:ss')}">
+							最后更新时间
+						</span>
+						<span class="badge badge-pill badge-danger float-right mt-1" th:if="${flag.top}">置顶</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
+<footer class="fixed-bottom text-center text-secondary">
+	<a target="_blank" href="http://www.beian.miit.gov.cn">闽ICP备18010743号-2</a><br>
+	&copy;2019 -- <a target="_blank" href="https://www.ashtwo.cn">ashtwo.cn</a>
+</footer>
+<script src="/js/flag.js"></script>
+<script>
+	flag();
+</script>
+</body>
+</html>
