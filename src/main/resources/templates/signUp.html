@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>注册 | (⊙﹏⊙)这里插满了Flag</title>
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <script th:src="@{/js/jquery-3.1.1.min.js}" src="/js/jquery-3.1.1.min.js"></script>
+    <script th:src="@{/js/popper.min.js}" src="/js/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #dee2e6;">
+
+<div class="container mt-5 pt-3">
+
+    <div class="card shadow mt-5" style="width:350px;margin:auto">
+        <div class="card-header">
+            <h3 align="center">注册</h3>
+        </div>
+        <div class="card-body" style="opacity:0.8;">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="用户名"><br>
+                    <input type="email" name="email" class="form-control" placeholder="邮箱"><br>
+                    <input type="password" name="password" class="form-control" placeholder="密码"><br>
+                    <input type="password" name="password2" class="form-control" placeholder="确认密码">
+                    <label id="errorInfo" class="form-text text-danger float-right"></label>
+                </div>
+                <div style="text-align:center">
+                    <button id="register" type="submit" class="btn btn-primary" style="width:280px">注册</button>
+                </div>
+        </div>
+        <div class="card-footer">
+            <p class="text-center">已有账号？<a href="/signIn">点击登录</a></p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <div id="loading" class="spinner-border text-primary" role="status" style="display: none;"></div>
+    </div>
+</div>
+<script src="/js/flag.js"></script>
+<script>
+    signUp();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <title>验证 | (⊙﹏⊙)这里插满了Flag</title>
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon" />
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <script th:src="@{/js/jquery-3.1.1.min.js}" src="/js/jquery-3.1.1.min.js"></script>
+    <script th:src="@{/js/popper.min.js}" src="/js/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #dee2e6;">
+    <div class="jumbotron mt-5" style="width:50%;margin:0 auto">
+        <h3 th:text="${msg}"></h3>
+        <div class="lead mt-3 mb-3" th:if="${state}">
+            你的账号已通过验证！赶快去立个Flag吧！<a th:href="@{/signIn}">点我登录</a>
+        </div>
+        <div class="lead mt-3 mb-3" th:unless="${state}">
+            链接错误或过期会导致验证失败 <a th:href="@{/signUp}">我要立Flag!</a>
+        </div>
+        <footer class="blockquote-footer float-right">By (⊙﹏⊙)这里插满了Flag</footer>
+    </div>
+</body>
+</html>
